@@ -28,3 +28,25 @@ function nextSequence() {
     playSound(randomChosenColour);
   }
   
+document.querySelectorAll(".btn").forEach((button) => {
+  button.addEventListener("click", function () {
+    let userChosenColour = this.id;
+    userClickedPattern.push(userChosenColour);
+    playSound(userChosenColour);
+    animateClick(userChosenColour);
+    checkAnswer(userClickedPattern.length - 1);
+  });
+});
+
+function playSound(name) {
+  let audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
+
+function animateClick(currentColor) {
+  const button = document.getElementById(currentColor);
+  button.classList.add("pressed");
+  setTimeout(() => {
+    button.classList.remove("pressed");
+  }, 100);
+}
